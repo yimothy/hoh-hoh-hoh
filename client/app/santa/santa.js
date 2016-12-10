@@ -16,7 +16,6 @@ angular.module('hoh.santa', [])
     //Something like SantaFactory.createRoom($scope.data)
     //Change to get actual user id
     let userID = Auth.user.id;
-    console.log('this is AUTH.USER: ', Auth.user)
     SantaFactory.createRoom(userID, $scope.data.createRoom)
     .then(function() {
     //Reset createRoom object
@@ -32,7 +31,6 @@ angular.module('hoh.santa', [])
 .factory('SantaFactory', function($http){
 //Creates room
   var createRoom = function(userID, roomData) {
-    console.log('THIS IS userID: ', userID);
     console.log('THIS IS roomData: ', roomData  );
     return $http.post('/api/santa/' + userID, roomData)
 //WORK IN PROGRESS
