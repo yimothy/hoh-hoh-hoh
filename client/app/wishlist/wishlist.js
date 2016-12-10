@@ -73,6 +73,13 @@ angular.module('hoh.wishlist', [])
       });
   };
 
+  $scope.getUserLists = (id) => {
+    Wishlist.getUserLists(id)
+      .then((wishlists) => {
+        $scope.data.wishlists = wishlists;
+      });
+  };
+
   /*
    • Function: editListName(newName, wishlist)
    • Parameters:
@@ -155,6 +162,6 @@ angular.module('hoh.wishlist', [])
       .then(() => $scope.getAllItems(wishlist));
   };
 
-  // When the Wishlist.hmtl page loads it invokes getAllList to populate the wishlists.
-  $scope.getAllList();
+  // When the Wishlist.hmtl page loads it invokes getUserLists to populate the wishlists with the current user's lists.
+  $scope.getUserLists();
 });
