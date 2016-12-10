@@ -111,6 +111,7 @@ angular.module('hoh.wishlist', [])
 
   $scope.callApi = (query, wishlist) => {
     console.log('From within client/app/wishlist/wishlist.js: name, wishlist', query, wishlist);
+    $scope.data.query = query;
     Item.callApiForItem(query, wishlist.id)
       .then((searchResults) => {
         console.log('searchResults', searchResults.data);
@@ -119,10 +120,12 @@ angular.module('hoh.wishlist', [])
       });
   };
 
-  $scope.saveToDatabase = (index) => {
-    var itemForDataBase = $scope.data.searchResults[index].itemId;
-    Item.saveToDatabase(itemForDataBase)
+  $scope.saveToDatabase = (query, index) => {
+    console.log("$scope.data.results[index].itemId, query", query, $scope.data.searchResults[index].itemId)
+    var product_id = $scope.data.searchResults[index].itemId;
+    Item.saveToDatabase(query, product_id)
       .then(() => {
+        $scope.data.searchResults = {};
         console.log('Added to db');
       });
 

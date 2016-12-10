@@ -91,10 +91,10 @@ angular.module('hoh.services', [])
   })
     .then(({ data }) => data);
 
-  const addItemToList = (name, id) => $http({
+  const addItemToList = (name, itemId, id) => $http({
     method: 'POST',
     url: '/api/item',
-    data: { name, id },
+    data: { name, itemId, id },
   })
       .then(({ data }) => data);
 
@@ -122,13 +122,13 @@ angular.module('hoh.services', [])
     return searchResults;
   });
 
-  const saveToDatabase = (itemForDataBase) => $http({
+  const saveToDatabase = (name, product_id) => $http({
     method: 'POST',
     url: '/api/wishlist/item',
-    data: {itemForDataBase}
+    data: {name, product_id}
   })
-  .then((itemInDatabase) => {
-    console.log('itemInDatabase', itemInDatabase);
+  .then((name, product_id) => {
+    console.log('name, product_id', name, product_id);
     return itemInDatabase;
   });
 

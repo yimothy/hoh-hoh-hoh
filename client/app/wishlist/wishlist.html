@@ -83,7 +83,7 @@
 
         <!-- Displays items -->
         <div ng-repeat="item in data.items[wishlist.id]">
-          {{item.name}}
+          {{item.name item.itemId}}
         </div>
           <i class="fa fa-pencil-square-o" aria-hidden="true" ng-click='itemRenaming = !itemRenaming'></i>
           <!-- Pencil Glyph that toggles the display of <div ng-show='itemRemaning'> below -->
@@ -109,7 +109,7 @@
           <!-- X Glyph, when clicked calls deletelItem and pass in the current wishlist and current item ID -->
           <i class="fa fa-times" aria-hidden="true" ng-click='deleteItem(wishlist, item.id)'></i>
           <br>
-          <div ng-repeat="result in data.searchResults track by $index" class="productCard" ng-click="saveToDatabase($index)">
+          <div ng-repeat="result in data.searchResults track by $index" class="productCard" ng-click="saveToDatabase(data.query, $index)">
             <img src="{{result.mediumImage}}">
             {{result.name.substring(0, 70)}}
             {{result.price}}

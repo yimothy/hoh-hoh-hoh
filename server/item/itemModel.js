@@ -7,7 +7,7 @@ module.exports = {
       const queryStr = 'SELECT name, id FROM items WHERE wishlist_id = ?';
       db.query(queryStr, params, (err, results) => {
         if (err) {
-          console.log('Error in server/item/wishlistModels.js getAll : ', err);
+          console.log('Error in server/item/itemModels.js getAll : ', err);
         } else {
           callback(results);
         }
@@ -19,7 +19,19 @@ module.exports = {
       const queryStr = 'INSERT INTO items (name, wishlist_id) VALUES (?, ?)';
       db.query(queryStr, params, (err, results) => {
         if (err) {
-          console.log('Error in server/item/wishlistModel.js addOne : ', err);
+          console.log('Error in server/item/itemModels.js addOne : ', err);
+        } else {
+          callback(results);
+        }
+      });
+    },
+
+    addProduct(params, callback) {
+      //save query string in separate var to pass into database query, question marks denote params being passed in
+      const queryStr = 'UPDATE items set product_id=? where name=?';
+      db.query(queryStr, params, (err, results) => {
+        if (err) {
+          console.log('Error in server/item/itemModels.js addProduct : ', err);
         } else {
           callback(results);
         }
@@ -31,7 +43,7 @@ module.exports = {
       const queryStr = 'UPDATE items SET name=? WHERE id=?';
       db.query(queryStr, params, (err, results) => {
         if (err) {
-          console.log('Error in server/item/wishlistModel.js renameList : ', err);
+          console.log('Error in server/item/itemModels.js renameList : ', err);
         } else {
           callback(results);
         }

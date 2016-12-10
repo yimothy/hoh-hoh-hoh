@@ -19,6 +19,14 @@ module.exports = {
       });
     },
 
+    postProductId({ body: { name, product_id } }, res) {
+      //request in object format, plucked out itemname and userId from req.body, passing down as params
+      const params = [product_id, name];
+      itemModel.items.addProduct(params, () => {
+        res.sendStatus(201);
+      });
+    },
+
     rename({ body: { name, item } }, res) {
       //request in object format, plucked out itemname and userId from req.body, passing down as params
       const params = [name, item];
