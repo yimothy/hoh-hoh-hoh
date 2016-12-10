@@ -72,14 +72,16 @@ module.exports = {
         // findRoomName(5, function(name) {
         //   console.log('THIS IS THE NAME: ', name);
         // });
-        results.forEach(function(roomID) {
+        results.forEach(function(roomID, index) {
           findRoomName(roomID, function(name) {
-            callback(name);
             // console.log('THESE ARE THE ROOM NAMES IN BACK END: ', name);
-            // roomNames.push(name);
+            console.log('roomID from ####', index, roomID, name);
+            roomNames.push(name);
+            if(index === (results.length - 1)) {
+              callback(roomNames);
+            }
           })
         })
-        // callback(roomNames);
       }
     })
   }

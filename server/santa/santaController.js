@@ -13,7 +13,7 @@ module.exports = {
     var id = req.params.id;
     console.log('THIS IS THE USER ID IN GETROOMS: ', id);
     santaModel.getRooms(id, (results) => {
-      // res.json(results);
+      res.json(results);
     });
   }
 }
