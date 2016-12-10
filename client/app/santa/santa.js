@@ -3,7 +3,7 @@ angular.module('hoh.santa', [])
 .controller('SantaController', function($scope, SantaFactory, Auth) {
   $scope.data = {};
   $scope.data.createRoom = {};
-  $scope.data.createRoom.roomUsers = ['USER1', 'USER2'];
+  $scope.data.createRoom.roomUsers = ['user1', 'user2'];
 
   $scope.data.userData = {};
   $scope.data.userData.rooms = ['ROOM1', 'ROOM2'];
@@ -22,27 +22,27 @@ angular.module('hoh.santa', [])
       $scope.data.createRoom = {}
     })
   }
-  // $scope.getRooms = function() {
-  //
-  // }
+
+  $scope.getRooms = function() {
+    let userID = Auth.user.id;
+    SantaFactory.getRooms(userID, $scope.data.userData.rooms);
+  }
+
 
 })
 
 .factory('SantaFactory', function($http){
 //Creates room
+//Save in users in created room user's database
   var createRoom = function(userID, roomData) {
-    console.log('THIS IS roomData: ', roomData  );
     return $http.post('/api/santa/' + userID, roomData)
-//WORK IN PROGRESS
-    .then(function(res) {
-      return res;
-    })
   }
 
-//Save in users in created room user's database
 
 //Gets all rooms for the user from database
-
+  var getRooms = function(userID, userData) {
+    return $http.get('/api/santa/' + userID, userData);
+  }
 //Gets all users in the room
 
 //Gets the user's receiver
@@ -50,6 +50,7 @@ angular.module('hoh.santa', [])
 
   //return methods in object
   return {
-    createRoom: createRoom
+    createRoom: createRoom,
+    getRooms: getRooms
   }
 })
