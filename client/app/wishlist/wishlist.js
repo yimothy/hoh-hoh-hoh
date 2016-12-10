@@ -110,23 +110,23 @@ angular.module('hoh.wishlist', [])
   };
 
   $scope.callApi = (query, wishlist) => {
-    console.log("From within client/app/wishlist/wishlist.js: name, wishlist", query, wishlist)
+    console.log('From within client/app/wishlist/wishlist.js: name, wishlist', query, wishlist);
     Item.callApiForItem(query, wishlist.id)
       .then((searchResults) => {
-        console.log("searchResults", searchResults.data)
-        $scope.data.searchResults = searchResults.data.slice(0,5);
+        console.log('searchResults', searchResults.data);
+        $scope.data.searchResults = searchResults.data.slice(0, 5);
         $scope.getAllItems(wishlist);
-      })
-  }
+      });
+  };
 
   $scope.saveToDatabase = (index) => {
-    var itemForDataBase = $scope.data.searchResults[index]
+    var itemForDataBase = $scope.data.searchResults[index].itemId;
     Item.saveToDatabase(itemForDataBase)
       .then(() => {
-        console.log("Added to db");
-      })
+        console.log('Added to db');
+      });
 
-  }
+  };
 
   /*
    • Function: editItem(name, item, wishlist)
