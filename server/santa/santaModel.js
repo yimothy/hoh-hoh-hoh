@@ -57,17 +57,30 @@ module.exports = {
         callback(results);
       }
     });
-  }
+  },
 
-  getRooms: function(roomsArray, userID, callback) {
+  getRooms: function(userID, callback) {
     var queryStr = 'SELECT room_id FROM users_rooms WHERE user_id = ?';
-    db.query(queryStr, (err, results) => {
+    var roomNames = [];
+    db.query(queryStr, userID, (err, results) => {
       if(err) {
         console.log('Error in query when getting user rooms');
       }
       else{
-        callback(results);
+        console.log('THESE ARE ROOM ID RESULTS: ', JSON.stringify(results), "THIS IS THE ID: ", userID);
+        // findRoomName()
+        // findRoomName(5, function(name) {
+        //   console.log('THIS IS THE NAME: ', name);
+        // });
+        results.forEach(function(roomID) {
+          findRoomName(roomID, function(name) {
+            callback(name);
+            // console.log('THESE ARE THE ROOM NAMES IN BACK END: ', name);
+            // roomNames.push(name);
+          })
+        })
+        // callback(roomNames);
       }
-    });
+    })
   }
 }
