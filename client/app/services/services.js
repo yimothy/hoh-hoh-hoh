@@ -21,6 +21,12 @@ angular.module('hoh.services', [])
   })
     .then(({ data }) => data);
 
+  const getUserLists = (id) => $http({
+    method: 'GET',
+    url: '/api/wishlist/' + id,
+  })
+    .then(({ data }) => data);
+
   /*
    • Function: addList(name)
    • Invoked by: WishlistController - addList
@@ -76,7 +82,7 @@ angular.module('hoh.services', [])
   })
     .then(({ data }) => data);
 
-  return { addList, getAllList, renameList, deleteList };
+  return { addList, getAllList, getUserLists, renameList, deleteList };
 })
 
 /* Item Factory
