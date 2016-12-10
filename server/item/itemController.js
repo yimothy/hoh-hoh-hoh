@@ -11,9 +11,9 @@ module.exports = {
       });
     },
 
-    post({ body: { name, id } }, res) {
+    post({ body: { name, itemId, id } }, res) {
       //request in object format, plucked out itemname and userId from req.body, passing down as params
-      const params = [name, id];
+      const params = [name, itemId, id];
       itemModel.items.addOne(params, () => {
         res.sendStatus(201);
       });

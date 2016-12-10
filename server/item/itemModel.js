@@ -16,7 +16,7 @@ module.exports = {
 
     addOne(params, callback) {
       //save query string in separate var to pass into database query, question marks denote params being passed in
-      const queryStr = 'INSERT INTO items (name, wishlist_id) VALUES (?, ?)';
+      const queryStr = 'INSERT INTO items (name, item_id, wishlist_id) VALUES (?, ?, ?)';
       db.query(queryStr, params, (err, results) => {
         if (err) {
           console.log('Error in server/item/wishlistModel.js addOne : ', err);

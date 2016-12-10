@@ -101,8 +101,8 @@ angular.module('hoh.wishlist', [])
    --- it clears the input field.
    */
 
-  $scope.addItem = (name, wishlist) => {
-    Item.addItemToList(name, wishlist.id)
+  $scope.addItem = (name, item, wishlist) => {
+    Item.addItemToList(name, item.id, wishlist.id)
       .then(() => {
         $scope.getAllItems(wishlist);
         $scope.data.itemName = '';
