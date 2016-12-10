@@ -40,7 +40,7 @@ module.exports = (app, express) => {
 
   // requests for secret santa
   app.post('/api/santa/:id', santaController.createRoom);
-
+  app.get('/api/santa/:id', santaController.getRooms);
 
   //Walmart Search Api
 
@@ -53,7 +53,7 @@ module.exports = (app, express) => {
     });
   });
 
-  app.get('/api/walmart/', function(req, res) {  
+  app.get('/api/walmart/', function(req, res) {
     var publicApi = 'http://api.walmartlabs.com/v1/search?query=' + req.body.name + '&apiKey=' + walmartId;
     request({url: publicApi}, function (error, response, body) {
       if (!error && response.statusCode === 200) {
@@ -64,7 +64,7 @@ module.exports = (app, express) => {
   });
   //saving itemId to the database
   app.post('/api/wishlist/item', itemController.items.postProductId);
- 
+
  //Walmart itemId Api
   app.post('/api/walmart/itemId', function(req, res) {
     walmartSearchId.searchItemId(req.body.query, function(data) {
