@@ -8,15 +8,14 @@ module.exports = {
       });
     },
 
-    getByUser({ user: { id } }, res) {
-      if (id) {
-        const params = id;
-        wishlistModel.wishlists.getByUser(params, (results) => {
-          res.json(results);
-        });
-      } else {
-        res.sendStatus(401);
+    getByUser({ params: { id }, user: { id: userId } }, res) {
+      let params = id;
+      if (id === 'undefined') {
+        params = userId;
       }
+      wishlistModel.wishlists.getByUser(params, (results) => {
+        res.json(results);
+      });
     },
 
     post({ body: { name }, user: { id } }, res) {
