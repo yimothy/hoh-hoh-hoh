@@ -25,9 +25,12 @@ angular.module('hoh.santa', [])
 
   $scope.getRooms = function() {
     let userID = Auth.user.id;
-    SantaFactory.getRooms(userID, $scope.data.userData.rooms);
+    SantaFactory.getRooms(userID, $scope.data.userData.rooms)
+    .then(function(roomNames) {
+      console.log('THESE ARE THE ROOM NAMES IN FRONT END: ',roomNames);
+    })
   }
-
+  $scope.getRooms();
 
 })
 
