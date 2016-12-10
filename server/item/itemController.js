@@ -11,10 +11,18 @@ module.exports = {
       });
     },
 
-    post({ body: { name, itemId, id } }, res) {
+    post({ body: { name, id } }, res) {
       //request in object format, plucked out itemname and userId from req.body, passing down as params
-      const params = [name, itemId, id];
+      const params = [name, id];
       itemModel.items.addOne(params, () => {
+        res.sendStatus(201);
+      });
+    },
+
+    postProductId({ body: { name, product_id } }, res) {
+      //request in object format, plucked out itemname and userId from req.body, passing down as params
+      const params = [product_id, name];
+      itemModel.items.addProduct(params, () => {
         res.sendStatus(201);
       });
     },
