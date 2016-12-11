@@ -2,19 +2,19 @@ angular.module('description', ['ui.bootstrap'])
 
 .controller('descriptionController', function($scope, $http, $log) {
   
-  $scope.groups = [
+  $scope.products = [
     {
-      title: 'Dynamic Group Header - 1',
-      content: 'Dynamic Group Body - 1',
-      open: false
+      title: 'Ipod',
+      content: 'Description',
+      stock: false //just an example
     }
   ];
 
   $scope.addNew = function() {
-    $scope.groups.push({
+    $scope.products.push({
       title: 'ipod',
       content: 'Dynamically added new one',
-      open: false
+      stock: false
     });
   };
 });
