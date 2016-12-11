@@ -3,7 +3,8 @@
   <head>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.js"></script>
     <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.2.0.js"></script>
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <script src="accordion.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
   </head>
   <body>
 
@@ -11,18 +12,21 @@
   <accordion>
     <accordion-group ng-repeat="group in groups" heading="{{group.title}}" is-open="group.open">
       <accordion-heading>
-                some text here, on the left side of the header.
+               ipod
                 
-                <div class="pull-right">
+                <!-- <div class="pull-right">
                   <span>1st info</span>
                   <span>2nd info</span>
                   <span>maybe 3rd?</span>
-                </div>                
+                </div>                 -->
       </accordion-heading>
-      This is just some content to illustrate fancy headings.
+      Image: someImage <br>
+      Description:This is just some content to illustrate product description <br>
+      Price: 123 <br>
+      Reviews: 4.9 
+
     </accordion-group>    
   </accordion>
 </div>
-  <script src="accordion.js"></script>
   </body>
 </html>
