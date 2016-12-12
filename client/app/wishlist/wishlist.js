@@ -121,8 +121,11 @@ angular.module('hoh.wishlist', [])
   };
 
   $scope.saveToDatabase = (query, index) => {
-    console.log("$scope.data.results[index].itemId, query", query, $scope.data.searchResults[index].itemId)
-    var product_id = $scope.data.searchResults[index].itemId;
+    console.log("$scope.data.results[index].itemId, query", query, $scope.data.searchResults[index].itemId) //refactor this
+    console.log("$scope.data.results, query", $scope.data.searchResults)
+    var product_id = JSON.stringify($scope.data.searchResults[index]);
+    // product_id = JSON.stringify(product_id);
+    console.log("product_id", product_id)
     Item.saveToDatabase(query, product_id)
       .then(() => {
         $scope.data.searchResults = {};
