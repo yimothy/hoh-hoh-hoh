@@ -1,0 +1,30 @@
+<!doctype html>
+<html ng-app="description">
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.9/angular.js"></script>
+    <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.2.0.js"></script>
+    <script src="accordion.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+  </head>
+  <body>
+
+<div ng-controller="descriptionController">
+  <accordion>
+    <accordion-group ng-repeat="product in products" heading="{{product.title}}" is-available="product.stock">
+      <accordion-heading > 
+        Ipod
+      </accordion-heading>
+
+      <a href="http://c.affil.walmart.com/t/api01?l=http%3A%2F%2Fwww.walmart.com%2Fip%2FApple-iPod-touch-32GB-Assorted-Colors%2F42608125%3Faffp1%3DJFWadZu7gwbsecIJX94pOOojuimtb1RDzXYWHnhYiYg%26affilsrc%3Dapi%26veh%3Daff%26wmlspartner%3Dreadonlyapi"> <img src="https://i5.walmartimages.com/asr/3546627b-cf1c-4b7a-b6fc-d7fd3d52c02a_1.b5c2c953db103d317ac0b2bf307c9b99.jpeg?odnHeight=180&odnWidth=180&odnBg=FFFFFF"/></a> <br>
+      <b>Name</b>: Apple iPod touch 32GB, Assorted Colors <br>
+      <b>Sale Price</b>: 279.89 <br>
+      <b>Category</b>: Electronics/Portable Audio/Apple iPods/iPod Touch <br>
+      <b>Description</b> : The Apple iPod Touch 32GB is loaded with features. It is the ideal solution for carrying your music collection in your pocket. The device comes in five stunning colors, giving you plenty of options to choose from. Listen to your favorite songs from Apple Music and iTunes. It also offers the ultimate mobile gaming experience for versatility. Take outstanding photos and videos with the new 8MP iSight camera and make video calls with the improved FaceTime HD camera. Use the Bluetooth iPod Touch to stay connected with messages and to use the most popular social networking apps. The 4&quot; retina display provides a quality viewing experience. It offers 1080p HD video recording and up to 40 hours of audio playback. With a sleek design and the ability to play your favorite tunes with just the touch of a button, it is wonderful for users on-the-go. It is equipped with 802.11ac Wi-Fi for Internet availability almost anywhere and Bluetooth 4.1 for hands-free use or pairing with other devices. <br>
+      <b>Customer rating</b>: 4.457 <img src="https://www.walmart.com/i/CustRating/4_5.gif"/> <br>
+      <b>Reviews</b>: 35
+
+    </accordion-group>    
+  </accordion>
+</div>
+  </body>
+</html>

@@ -5,7 +5,6 @@ var walmartId = process.env.API_KEY;
 var formatUrl = function(query) {
   return 'http://api.walmartlabs.com/v1/search?query=' + query + '&apiKey=' + walmartId;
 };
-console.log('url', formatUrl('ipod'));
 
 var search = function(query, callback) {
   console.log('formatted', formatUrl(query));
