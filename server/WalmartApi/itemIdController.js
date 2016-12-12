@@ -6,7 +6,6 @@ var searchId = function(itemId) {
 };
 
 var searchItemId = function(itemId, callback) {
-  console.log('ITEMID', searchId(itemId));
   request({url: searchId(itemId)}, function(err, res, body) {
     if (!err && res.statusCode === 200) {
       callback(body); 
