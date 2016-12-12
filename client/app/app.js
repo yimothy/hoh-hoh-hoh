@@ -30,6 +30,10 @@ angular.module('hoh', [
       templateUrl: 'santa/santa-main.html',
       controller: 'SantaController'
     })
+    .when('/following', {
+      templateUrl: 'user/following.html',
+      controller: 'FollowsController'
+    })
     .otherwise({ redirectTo: '/' });                 // All other request redirect to '/'
 
   $httpProvider.interceptors.push('AttachTokens');
