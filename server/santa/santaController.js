@@ -13,6 +13,14 @@ module.exports = {
     santaModel.getRooms(id, (results) => {
       res.json(results);
     });
+  },
+  getUsersInRoom: function(req, res) {
+    var id = req.params.id;
+    var roomID = req.params.roomID;
+    console.log('THIS IS THE ID FROM GET USERS: ', id, 'THIS IS THE ROOMID', roomID);
+    santaModel.getUsersInRoom(roomID, (results) => {
+      res.json(results);
+    });
   }
 }
 // /api/santa/USERID
