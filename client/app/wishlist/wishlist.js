@@ -40,7 +40,7 @@ angular.module('hoh.wishlist', [])
     Item.getAllItems(wishlist)
       .then((items) => {
         const id = wishlist.id;
-        $scope.data.items[id] = items;
+        $scope.data.items[id] = JSON.parse(items);
       });
   };
 
