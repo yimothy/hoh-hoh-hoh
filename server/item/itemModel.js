@@ -4,7 +4,7 @@ module.exports = {
   items: {
     getAll(params, callback) {
       //save query string in separate var to pass into database query, question marks denote params being passed in
-      const queryStr = 'SELECT name, id FROM items WHERE wishlist_id = ?';
+      const queryStr = 'SELECT product_id, id FROM items WHERE wishlist_id = ?';
       db.query(queryStr, params, (err, results) => {
         if (err) {
           console.log('Error in server/item/itemModels.js getAll : ', err);
