@@ -1,4 +1,4 @@
-<div class='container' ng-controller='SantaController'>
+<div class='container' ng-controller='RoomController'>
   <h1>Your Room</h1>
 
   <h2>Users in Room</h2>
@@ -6,5 +6,7 @@
     <div ng-repeat='user in data.roomData.users track by user.user_id'>
       {{user}}
     </div>
+
+    <p> {{ data.roomData.users}}</p>
 
 </div>

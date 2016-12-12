@@ -1,6 +1,6 @@
 angular.module('hoh.santa', [])
 
-.controller('SantaController', function($scope, SantaFactory, Auth) {
+.controller('SantaController', function($scope, $location, SantaFactory, Auth) {
   Auth.getSessionData();
   $scope.data = {};
   $scope.data.createRoom = {};
@@ -37,19 +37,13 @@ angular.module('hoh.santa', [])
         console.log('THIS IS THE USER ID IN GETROOMS ANGULAR: ', userID);
     SantaFactory.getRooms(userID, $scope.data.userData.rooms)
     .then(function(roomNames) {
-      console.log('THESE ARE THE ROOM NAMES IN FRONT END: ',roomNames);
       $scope.data.userData.rooms = roomNames.data;
     })
   }
   $scope.getRooms();
 
-  $scope.getUsersInRoom = function(roomID) {
-    Auth.getSessionData();
-    let userID = Auth.user.id;
-    SantaFactory.getUsersInRoom(userID, roomID)
-    .then(function(users) {
-      $scope.data.roomData.users = users.data;
-    })
+  $scope.goToRoom = function(roomID) {
+    $location.path('/santa/' + roomID);
   }
 
 })
@@ -67,14 +61,11 @@ angular.module('hoh.santa', [])
     return $http.get('/api/santa/' + userID, userData);
   }
 //Gets all users in the room
-  var getUsersInRoom = function(userID, roomID) {
-    return $http.get('/api/santa/' + userID + '/' + roomID);
-  }
+
 //Gets the user's receiver
 
   return {
     createRoom: createRoom,
-    getRooms: getRooms,
-    getUsersInRoom
+    getRooms: getRooms
   }
 })
