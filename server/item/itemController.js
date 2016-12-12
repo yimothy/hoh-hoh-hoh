@@ -23,8 +23,9 @@ module.exports = {
       //request in object format, plucked out itemname and userId from req.body, passing down as params
       const params = [product_id, name];
       console.log("params from within postProductId", params);
-      itemModel.items.addProduct(params, () => {
-        res.sendStatus(201);
+      itemModel.items.addProduct(params, (result) => {
+        // res.sendStatus(201);
+        res.json(result);
       });
     },
 
