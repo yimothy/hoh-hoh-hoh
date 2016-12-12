@@ -72,6 +72,7 @@ DROP TABLE IF EXISTS `rooms`;
 CREATE TABLE `rooms` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NULL DEFAULT 'Unnamed Room',
+  `admin_id` INTEGER NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
