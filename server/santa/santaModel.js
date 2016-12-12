@@ -42,6 +42,7 @@ module.exports = {
   createRoom: function(roomName, adminID, otherUsersNames, callback) {
     var queryStr = 'INSERT INTO rooms (name, admin_id) VALUES (?)';
     var roomData = [roomName, adminID];
+    console.log('THIS IS THE ADMIN ID IN CREATE ROOM: ', adminID);
     db.query(queryStr, [roomData], function(err, results) {
       if(err) {
         console.log('Error in secret santa model create room function: ', err);
@@ -67,21 +68,35 @@ module.exports = {
         console.log('Error in query when getting user rooms');
       }
       else{
-        console.log('THESE ARE ROOM ID RESULTS: ', JSON.stringify(results), "THIS IS THE ID: ", userID);
-        // findRoomName()
-        // findRoomName(5, function(name) {
-        //   console.log('THIS IS THE NAME: ', name);
-        // });
-        results.forEach(function(roomID, index) {
-          findRoomName(roomID, function(name) {
-            // console.log('THESE ARE THE ROOM NAMES IN BACK END: ', name);
-            console.log('roomID from ####', index, roomID, name);
-            roomNames.push(name);
-            if(index === (results.length - 1)) {
+        var asyncIdx = 0;
+        // results = JSON.stringify(results);
+        for(var i = 0; i < results.length; i++) {
+          var roomID = results[i];
+          findRoomName(roomID.room_id, function(name) {
+            var defaultName = name[0].name || 'Unnamed Room';
+            roomNames.push([results[asyncIdx].room_id, defaultName]);
+            console.log('THIS IS THE ROOM ID IN EACH ITEM IN ARRAY: ', name[0].name, 'AND INDEX: ', i);
+            asyncIdx++;
+            if(asyncIdx === results.length-1) {
+              console.log('THIS IS THE ROOMNAMES ARRAY: ', roomNames);
               callback(roomNames);
             }
           })
-        })
+        }
+
+        // // callback(results);
+        // results.forEach(function(roomID, index) {
+        //   findRoomName(roomID, function(name) {
+        //     // console.log('THESE ARE THE ROOM NAMES IN BACK END: ', name);
+        //     console.log('roomID from ####', index, roomID, name);
+        //     roomNames.push(name);
+        //     console.log('THIS IS THE ROOM NAME: ', name);
+        //     if(index === (results.length - 1)) {
+        //       callback(roomNames);
+        //     }
+        //   })
+        // })
+
       }
     })
   }
