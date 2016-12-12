@@ -61,11 +61,14 @@ angular.module('hoh.santa', [])
     return $http.get('/api/santa/' + userID, userData);
   }
 //Gets all users in the room
-
+  var getUsersInRoom = function(userID, roomID) {
+    return $http.get('/api/santa/' + userID + '/' + roomID);
+  }
 //Gets the user's receiver
 
   return {
     createRoom: createRoom,
-    getRooms: getRooms
+    getRooms: getRooms,
+    getUsersInRoom
   }
 })
