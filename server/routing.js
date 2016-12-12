@@ -41,7 +41,7 @@ module.exports = (app, express) => {
   // requests for secret santa
   app.post('/api/santa/:id', santaController.createRoom);
   app.get('/api/santa/:id', santaController.getRooms);
-
+  app.get('/api/santa/:id/:roomID', santaController.getUsersInRoom);
   //Walmart Search Api
 
   app.post('/api/walmart', function(req, res) {

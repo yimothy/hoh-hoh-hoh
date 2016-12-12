@@ -1,6 +1,7 @@
 angular.module('hoh.santa', [])
 
 .controller('SantaController', function($scope, SantaFactory, Auth) {
+  Auth.getSessionData();
   $scope.data = {};
   $scope.data.createRoom = {};
   $scope.data.createRoom.roomUsers = [];
@@ -8,11 +9,15 @@ angular.module('hoh.santa', [])
   $scope.data.userData = {};
   $scope.data.userData.rooms = [];
 
+  $scope.data.roomData = {};
+  $scope.data.roomData.users = [];
+
   $scope.addUserToRoom = function(user) {
     $scope.data.createRoom.roomUsers.push(user);
   }
 
   $scope.createRoom = function() {
+    Auth.getSessionData();
     //Something like SantaFactory.createRoom($scope.data)
     //Change to get actual user id
     let userID = Auth.user.id;
@@ -20,13 +25,15 @@ angular.module('hoh.santa', [])
     SantaFactory.createRoom(userID, $scope.data.createRoom)
     .then(function() {
     //Reset createRoom object
+      $scope.getRooms();
       $scope.data.createRoom.roomUsers = [];
+      $scope.data.createRoom.roomName = '';
     })
   }
 
   $scope.getRooms = function() {
-    // let userID = Auth.user.id;
-    let userID = 1;
+    Auth.getSessionData();
+    let userID = Auth.user.id;
         console.log('THIS IS THE USER ID IN GETROOMS ANGULAR: ', userID);
     SantaFactory.getRooms(userID, $scope.data.userData.rooms)
     .then(function(roomNames) {
@@ -36,8 +43,14 @@ angular.module('hoh.santa', [])
   }
   $scope.getRooms();
 
-  // $scope.getUsersInRoom = function(room_id) {
-  // }
+  $scope.getUsersInRoom = function(roomID) {
+    Auth.getSessionData();
+    let userID = Auth.user.id;
+    SantaFactory.getUsersInRoom(userID, roomID)
+    .then(function(users) {
+      $scope.data.roomData.users = users.data;
+    })
+  }
 
 })
 
@@ -45,7 +58,6 @@ angular.module('hoh.santa', [])
 //Creates room
 //Save in users in created room user's database
   var createRoom = function(userID, roomData) {
-
     return $http.post('/api/santa/' + userID, roomData)
   }
 
@@ -55,13 +67,14 @@ angular.module('hoh.santa', [])
     return $http.get('/api/santa/' + userID, userData);
   }
 //Gets all users in the room
-
+  var getUsersInRoom = function(userID, roomID) {
+    return $http.get('/api/santa/' + userID + '/' + roomID);
+  }
 //Gets the user's receiver
 
-
-  //return methods in object
   return {
     createRoom: createRoom,
-    getRooms: getRooms
+    getRooms: getRooms,
+    getUsersInRoom
   }
 })
