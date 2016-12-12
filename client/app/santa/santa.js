@@ -25,8 +25,8 @@ angular.module('hoh.santa', [])
   }
 
   $scope.getRooms = function() {
-    let userID = Auth.user.id;
-    // let userID = 2;
+    // let userID = Auth.user.id;
+    let userID = 1;
         console.log('THIS IS THE USER ID IN GETROOMS ANGULAR: ', userID);
     SantaFactory.getRooms(userID, $scope.data.userData.rooms)
     .then(function(roomNames) {
@@ -35,6 +35,9 @@ angular.module('hoh.santa', [])
     })
   }
   $scope.getRooms();
+
+  // $scope.getUsersInRoom = function(room_id) {
+  // }
 
 })
 

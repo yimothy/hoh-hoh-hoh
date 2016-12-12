@@ -74,7 +74,7 @@ module.exports = {
           var roomID = results[i];
           findRoomName(roomID.room_id, function(name) {
             var defaultName = name[0].name || 'Unnamed Room';
-            roomNames.push([results[asyncIdx].room_id, defaultName]);
+            roomNames.push({room_id: results[asyncIdx].room_id, room_name: defaultName});
             console.log('THIS IS THE ROOM ID IN EACH ITEM IN ARRAY: ', name[0].name, 'AND INDEX: ', i);
             asyncIdx++;
             if(asyncIdx === results.length-1) {
