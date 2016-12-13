@@ -184,4 +184,14 @@ angular.module('hoh.wishlist', [])
 
   // When the Wishlist.hmtl page loads it invokes getUserLists to populate the wishlists with the current user's lists.
   $scope.getUserLists();
+})
+.controller('ListController', function($scope, Wishlist, Item, $routeParams) {
+  $scope.listData = {};
+
+  Wishlist.getListById($routeParams.id)
+  .then((list) => {
+    $scope.listData = list[0];
+    return Item.getAllItems($scope.listData.id);
+  })
+  .then((items) => $scope.listData.items = items);
 });
