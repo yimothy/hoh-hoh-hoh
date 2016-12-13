@@ -18,6 +18,13 @@ module.exports = {
       });
     },
 
+    getById({ params: { id } }, res) {
+      let params = id;
+      wishlistModel.wishlists.getById(params, (results) => {
+        res.json(results);
+      });
+    },
+
     post({ body: { name }, user: { id } }, res) {
       const params = [name, id];
       wishlistModel.wishlists.addOne(params, () => {
