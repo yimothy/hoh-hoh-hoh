@@ -169,5 +169,9 @@ angular.module('hoh.services', [])
     $location.path('/login');
   };
 
+  if (isAuth()) {
+    getSessionData();
+  }
+
   return { signin, signup, isAuth, signout, getSessionData, user };
 });
