@@ -1,14 +1,21 @@
 <div class='container' ng-controller='RoomController'>
   <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
   <div class='room-main'>
-    <h1>Your Room</h1>
-    <div> You are the secret santa for <span class='receiver'>{{data.receiverName}}</span>!</div>
+    <p id='your-room'>Your Room</p>
+    <div id='secret-santa'> You are the secret santa for <span class='receiver'>{{data.receiverName}}</span>!
+      <img src="http://www.animatedimages.org/data/media/359/animated-santa-claus-image-0235.gif" border="0" alt="animated-santa-claus-image-0235"/>
+
   </div>
   <div id='users-in-room'>
     <legend>Santas in this Room</legend>
     <!-- GET USERS IN THE ROOM -->
-      <p ng-repeat='user in data.roomData.users track by user.user_id'>
-        {{user.username}}
-      </p>
+    <p ng-repeat='user in data.roomData.users track by user.user_id'>
+      {{user.username}}
+    </p>
   </div>
+
+
+  </div>
+  <br><br>
+
 </div>
