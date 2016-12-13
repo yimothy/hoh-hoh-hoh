@@ -3,7 +3,8 @@ var santaModel = require('./santaModel');
 module.exports = {
   createRoom: function(req, res) {
     var id = req.params.id;
-    santaModel.createRoom(req.body.roomName, id, req.body.roomUsers, () => {
+    console.log('THIS IS THE REQ.BODY IN BACK: ', req.body);
+    santaModel.createRoom(req.body.roomName, id, req.body.santas, () => {
       res.sendStatus(201);
     });
   },
@@ -17,10 +18,21 @@ module.exports = {
   getUsersInRoom: function(req, res) {
     var id = req.params.id;
     var roomID = req.params.roomID;
-    console.log('THIS IS THE ID FROM GET USERS: ', id, 'THIS IS THE ROOMID', roomID);
-    santaModel.getUsersInRoom(roomID, (results) => {
+    santaModel.getUsersInRoom(id, roomID, (results) => {
       res.json(results);
     });
+  },
+  saveSantas: function(req, res) {
+    var roomID = req.params.roomID;
+    var santas = req.body;
+
+    console.log('THIS IS THE ROOMID IN SAVESANTAS BACK:, ', roomID);
+
+    console.log('THIS IS THE SANTAS ARRAY IN CONTROLLER: ', santas);
+    santaModel.saveSantas(roomID, santas, function() {
+      res.sendStatus(201);
+    })
+
   }
 }
 // /api/santa/USERID

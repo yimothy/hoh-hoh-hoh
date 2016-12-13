@@ -1,8 +1,8 @@
 const db = require('../database/config_deploy');
 
-var addUsersToRoom = function(userID, roomID) {
-  var queryStr = 'INSERT INTO users_rooms (user_id, room_id) VALUES (?)';
-  var insertUserData = [userID, roomID];
+var addUsersToRoom = function(userID, roomID, receiverID) {
+  var queryStr = 'INSERT INTO users_rooms (user_id, room_id, receiver_id) VALUES (?)';
+  var insertUserData = [userID, roomID, receiverID];
 
   db.query(queryStr, [insertUserData], function(err, results) {
     if(err) {
@@ -50,6 +50,19 @@ var findUserName = function(userID, callback) {
   })
 }
 
+var saveSanta = function(roomID, santaID, receiverID, callback) {
+  var queryStr = 'UPDATE users_rooms SET receiver_id = ? WHERE user_id= ? AND room_id = ?';
+  var params = [receiverID, santaID, roomID];
+  db.query(queryStr, [params], function(err, results) {
+    if(err) {
+      console.log('Error in saving santa');
+    }
+    else{
+      callback(results);
+    }
+  })
+}
+
 module.exports = {
   createRoom: function(roomName, adminID, otherUsersNames, callback) {
     var queryStr = 'INSERT INTO rooms (name, admin_id) VALUES (?)';
@@ -60,13 +73,36 @@ module.exports = {
       }
       else {
         var roomId = results.insertId;
-        addUsersToRoom(adminID, roomId);
+
         otherUsersNames.forEach(function(user) {
-          findUserID(user, function(userResults) {
-            addUsersToRoom(userResults[0].id, roomId);
-          })
-        });
-        callback(results);
+          console.log('THIS IS THE USER IN THE ADDUSERS TO ROOM: ', user);
+            if(Number.isInteger(user.santa_id)) {
+              findUserID(user.receiverName, function(userID) {
+                console.log('THIS IS THE USERID IN FIRST: ', userID);
+                addUsersToRoom(user.santa_id, roomId, userID[0].id)
+
+              })
+            }
+            else if(Number.isInteger(user.receiverName)) {
+              let receiverID = user.receiverName;
+              console.log('this is the receiverid IN THE SECOND: ', receiverID);
+              findUserID(user.santa_id, function(userID) {
+                addUsersToRoom(userID[0].id, roomId, receiverID);
+              })
+            }
+            else{
+              findUserID(user.santa_id, function(userResults) {
+                console.log('THIS IS THE USERRESULTS IN CREATE ROOM: ', userResults);
+                let santaID = userResults[0].id;
+                findUserID(user.receiverName, function(receiverResults) {
+                  let receiverID = receiverResults[0].id;
+                  addUsersToRoom(santaID, roomId, receiverID);
+                })
+              })
+            }
+          });
+          callback(results);
+
       }
     });
   },
@@ -97,31 +133,66 @@ module.exports = {
     })
   },
 
-  getUsersInRoom: function(roomID, callback) {
-    var queryStr = 'SELECT user_id FROM users_rooms WHERE room_id = ?';
+  getUsersInRoom: function(userID, roomID, callback) {
+    var queryStr = 'SELECT user_id, receiver_id FROM users_rooms WHERE room_id = ?';
+    // var queryStr2 = 'SELECT receiver_id FROM user_rooms WHERE room_id = ? AND user_id = ?';
     var userNames = [];
+    // var params = [roomID, userID];
+    // db.query(queryStr2, params, (err, results)=> {
+    //   if(err){
+    //     console.log('Error in getting the receiver');
+    //   }
+    //   else{
+    //     userNames.push(results);
+    //   }
+    // })
+
     db.query(queryStr, roomID, (err, results) => {
       if(err) {
         console.log('Error in query when getting usernames from room');
       }
       else {
         let asyncIdx = 0;
-        console.log('THESE ARE THE USERNAME RESULTS IN THE ROOM: ', results);
+
+        console.log('THESE ARE THE USER RESULTS: ', results);
         for(let i = 0; i < results.length; i++) {
           let userID = results[i];
           findUserName(userID.user_id, function(username) {
-            userNames.push({user_id: username[0].id, username: username[0].username});
+            userNames.push({user_id: username[0].id, username: username[0].username, receiver_id: userID.receiver_id});
             asyncIdx++;
             if(asyncIdx === results.length) {
+              console.log('THESE ARE THE USERDATA IN THE BACK: ', userNames);
               callback(userNames);
             }
           })
         }
       }
     })
+  },
 
+  saveSantas: function(roomID, santas, callback) {
+    let asyncIdx = 0;
+    for(let i = 0; i < santas.length; i++) {
+      let santaData = santas[i];
+      saveSanta(roomID, santaData.santa_id, santaData.receiver_id, function (result) {
+        console.log('santaData.receiverName has received his secret santa');
+      })
+    }
 
   }
+
+  // var saveSanta = function(roomID, santaID, receiverID, callback) {
+  //   var queryStr = 'UPDATE users_rooms SET receiver_id = ? WHERE user_id= ? AND room_id = ?';
+  //   var params = [receiverID, santaID, roomID];
+  //   db.query(queryStr, [params], function(err, results) {
+  //     if(err) {
+  //       console.log('Error in saving santa');
+  //     }
+  //     else{
+  //       callback(results);
+  //     }
+  //   })
+  // }
 
 
 }
