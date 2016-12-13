@@ -189,4 +189,10 @@ angular.module('hoh.services', [])
   };
 
   return { getAllFollowsUsers, followUser };
+})
+.factory('User', ($http) => {
+  const getUser = (id) => $http.get('/api/users/' + id)
+  .then((res) => res.data);
+
+  return { getUser };
 });
