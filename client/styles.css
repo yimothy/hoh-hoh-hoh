@@ -28,10 +28,12 @@ body {
 }
 #users-in-room {
   /*border: 5px blue;*/
+  font-size: 15px;
   width: 200px;
-  /*float: right;*/
-  /*position: absolute;
-  right: 40px;*/
+  float: left;
+  overflow: hidden;
+  position: absolute;
+  right: 200px;
   /*margin-top: -60px;*/
 }
 #room-name {
@@ -45,4 +47,40 @@ body {
 .create-text {
   font-weight: bold;
   /*font-size: 40px;*/
+}
+#your-room {
+  font-size: 40px;
+}
+.receiver {
+  font-size: 35px;
+}
+
+#santa-gif {
+  width: 40px;
+  height: 40px;
+}
+
+.secret-santa {
+  /*border-style: dashed;
+  border-color: red;*/
+  float: left;
+  width: 65%;
+  overflow: hidden;
+  font-size: 20px;
+}
+
+.santa-pic {
+  height: 60px;
+  width: 60px;
+}
+.wishlist-name {
+  font-size: 30px;
+}
+
+#receiver-wishlist {
+  font-size: 15px;
+}
+
+#santa-box {
+  margin-top: 15px;
 }

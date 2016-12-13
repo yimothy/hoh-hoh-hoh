@@ -1,14 +1,42 @@
 <div class='container' ng-controller='RoomController'>
   <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
   <div class='room-main'>
-    <h1>Your Room</h1>
-    <div> You are the secret santa for <span class='receiver'>{{data.receiverName}}</span>!</div>
+    <p id='your-room'>Your Room</p>
+    <div class='secret-santa'> You are the secret santa for <p class='receiver'>
+      <div id=santa-box>
+        <img class='santa-pic' src="../../santa.png" border="0"/>
+        {{data.receiverName}}
+        <img class='santa-pic' src="../../santa.png" border="0"/>
+      </div>
+<br>
+      <div id='current-rooms' class="col-md-4">
+        <!-- NG-REPEAT USER'S ROOMS HERE -->
+        <table class="table table-hover">
+          <tr>
+            <!-- <th>Room ID:</th> -->
+            <th class='wishlist-name'>{{data.wishlist.name}}</th>
+          </tr>
+          <tr id='receiver-wishlist' ng-repeat='item in data.wishlist.items'>
+            <td>{{item.name}}</td>
+          </tr>
+        </table>
+        <!-- GET USERS IN THE ROOM -->
+        <!-- <div ng-repeat='user in data.roomData.users track by user.user_id'>
+          {{user}}
+        </div> -->
+      </div>
+    </p>
   </div>
+
   <div id='users-in-room'>
     <legend>Santas in this Room</legend>
     <!-- GET USERS IN THE ROOM -->
-      <p ng-repeat='user in data.roomData.users track by user.user_id'>
-        {{user.username}}
-      </p>
+    <p ng-repeat='user in data.roomData.users track by user.user_id'>
+      {{user.username}}
+    </p>
   </div>
+
+
+  </div>
+
 </div>
