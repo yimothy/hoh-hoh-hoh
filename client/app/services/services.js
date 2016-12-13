@@ -174,4 +174,19 @@ angular.module('hoh.services', [])
   }
 
   return { signin, signup, isAuth, signout, getSessionData, user };
+})
+.factory('Follows', ($http) => {
+  const followUser = (followId) => {
+    return $http.post('/api/users/followers', {
+      followId
+    })
+      .then((res) => res.data);
+  };
+
+  const getAllFollowsUsers = () => {
+    return $http.get('/api/users/following')
+      .then((res) => res.data);
+  };
+
+  return { getAllFollowsUsers, followUser };
 });
