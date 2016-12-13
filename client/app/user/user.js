@@ -24,4 +24,18 @@ angular.module('hoh.user', [])
   };
 
   $scope.getFollowing();
+})
+.controller('ProfileController', function($scope, $location, Wishlist, User, $routeParams) {
+  $scope.userData = {};
+
+  User.getUser($routeParams.id)
+  .then((user) => {
+    $scope.userData = user;
+    return Wishlist.getUserLists(user.id);
+  })
+  .then((lists) => $scope.userData.lists = lists);
+
+  $scope.redirectList = (id) => {
+    $location.path('/lists/' + id);
+  };
 });
