@@ -30,11 +30,11 @@
     <!-- NG-REPEAT USER'S ROOMS HERE -->
     <table class="table table-hover">
       <tr>
-        <th>Room ID:</th>
+        <!-- <th>Room ID:</th> -->
         <th>Room Name:</th>
       </tr>
       <tr ng-click='goToRoom(room.room_id);' ng-repeat='room in data.userData.rooms track by room.room_id'>
-        <td>{{room.room_id}}</td>
+        <!-- <td>{{room.room_id}}</td> -->
         <td>{{room.room_name}}</td>
       </tr>
     </table>
