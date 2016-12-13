@@ -48,6 +48,16 @@ module.exports = {
         });
       }));
     },
+
+    getUser({ params: { id } }, res) {
+      userModel.users.getUser(id, (results) => {
+        if (results.length > 0) {
+          res.json(results[0]);
+        } else {
+          res.sendStatus(500);
+        }
+      });
+    },
   },
 
   middleware: {
