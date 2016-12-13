@@ -1,8 +1,9 @@
-<div class='container' ng-controller='SantaController'>
-  <h1>Secret Santa</h1>
-  <button>Add Room</button>
+<div class='container-fluid' ng-controller='SantaController'>
 
-    <div id='create-room'>
+  <h1>Secret Santa</h1>
+  <button ng-click='roomButton()' ng-show='!data.roomButton'>Add Room</button>
+
+    <div id='create-room' ng-show='data.roomButton'>
       <form>
         <div>Room Name:
           <div>
@@ -18,16 +19,25 @@
           <input type='text' placeholder='Enter Username' ng-model='newUser'></input>
           <button ng-click='addUserToRoom(newUser); newUser="";'>Add</button>
         </div>
+        <br>
         <button ng-click='createRoom()'>Create Room</button>
+        <button ng-click='roomButton()'>Cancel</button>
       </form>
     </div>
 
   <h2>Your Rooms</h2>
-  <div id='current-rooms' ng-repeat='room in data.userData.rooms track by room.room_id'>
+  <div id='current-rooms' class="col-md-4">
     <!-- NG-REPEAT USER'S ROOMS HERE -->
-    <div ng-click='goToRoom(room.room_id);'>
-      ID {{room.room_id}} NAME {{room.room_name}}
-    </div>
+    <table class="table table-hover">
+      <tr>
+        <!-- <th>Room ID:</th> -->
+        <th>Room Name:</th>
+      </tr>
+      <tr ng-click='goToRoom(room.room_id);' ng-repeat='room in data.userData.rooms track by room.room_id'>
+        <!-- <td>{{room.room_id}}</td> -->
+        <td>{{room.room_name}}</td>
+      </tr>
+    </table>
     <!-- GET USERS IN THE ROOM -->
     <!-- <div ng-repeat='user in data.roomData.users track by user.user_id'>
       {{user}}

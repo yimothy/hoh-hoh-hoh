@@ -2,10 +2,12 @@ angular.module('hoh.santa', [])
 
 .controller('SantaController', function($scope, $location, SantaFactory, Auth) {
   Auth.getSessionData();
+
   $scope.data = {};
   $scope.data.createRoom = {};
   $scope.data.createRoom.roomUsers = [];
   $scope.data.createRoom.santas = [];
+  $scope.data.roomButton = false;
 
   $scope.data.userData = {};
   $scope.data.userData.rooms = [];
@@ -15,6 +17,10 @@ angular.module('hoh.santa', [])
 
   $scope.addUserToRoom = function(user) {
     $scope.data.createRoom.roomUsers.push(user);
+  }
+
+  $scope.roomButton = function() {
+    $scope.data.roomButton = !$scope.data.roomButton;
   }
 
   $scope.createSantas = function(usernameArray) {
@@ -44,6 +50,7 @@ angular.module('hoh.santa', [])
     SantaFactory.createRoom(userID, $scope.data.createRoom)
     .then(function() {
     //Reset createRoom object
+      $scope.roomButton();
       $scope.getRooms();
       $scope.data.createRoom.roomUsers = [];
       $scope.data.createRoom.roomName = '';
@@ -75,6 +82,16 @@ angular.module('hoh.santa', [])
     return $http.post('/api/santa/' + userID, roomData)
   }
 
+  const getSessionData = () => $http({
+    method: 'GET',
+    url: '/api/session'
+  })
+    .then(({ data: userData }) => {
+      for (var prop in userData) {
+        user[prop] = userData[prop];
+      }
+    })
+    .catch(() => signout());
 
 //Gets all rooms for the user from database
   var getRooms = function(userID, userData) {
@@ -89,6 +106,6 @@ angular.module('hoh.santa', [])
   return {
     createRoom: createRoom,
     getRooms: getRooms,
-    getUsersInRoom
+    getUsersInRoom: getUsersInRoom
   }
 })
