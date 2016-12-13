@@ -23,7 +23,7 @@ angular.module('hoh.wishlist', [])
     Wishlist.addList($scope.data.newWishlistName)
       .then(() => {
         $scope.data.newWishlistName = '';
-        $scope.getAllList();
+        $scope.getUserLists();
       });
   };
 
@@ -61,7 +61,7 @@ angular.module('hoh.wishlist', [])
   $scope.deleteList = ({ id }) => {
     Wishlist.deleteList(id)
       .then(() => {
-        $scope.getAllList();
+        $scope.getUserLists();
       });
   };
 
@@ -99,7 +99,7 @@ angular.module('hoh.wishlist', [])
   $scope.editListName = (newName, { id }) => {
     Wishlist.renameList(newName, id)
       .then(() => {
-        $scope.getAllList();
+        $scope.getUserLists();
         $scope.data.renameList = '';
       });
   };
