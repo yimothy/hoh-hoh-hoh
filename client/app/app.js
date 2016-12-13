@@ -44,6 +44,10 @@ angular.module('hoh', [
       templateUrl: 'user/profile.html',
       controller: 'ProfileController'
     })
+    .when('/lists/:id', {
+      templateUrl: 'wishlist/list.html',
+      controller: 'ListController'
+    })
     .otherwise({ redirectTo: '/' });                 // All other request redirect to '/'
 
   $httpProvider.interceptors.push('AttachTokens');
