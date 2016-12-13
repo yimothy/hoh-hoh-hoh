@@ -60,9 +60,27 @@ body {
   height: 40px;
 }
 
-#secret-santa {
+.secret-santa {
+  /*border-style: dashed;
+  border-color: red;*/
   float: left;
   width: 65%;
   overflow: hidden;
   font-size: 20px;
+}
+
+.santa-pic {
+  height: 60px;
+  width: 60px;
+}
+.wishlist-name {
+  font-size: 30px;
+}
+
+#receiver-wishlist {
+  font-size: 15px;
+}
+
+#santa-box {
+  margin-top: 15px;
 }
