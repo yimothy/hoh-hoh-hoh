@@ -84,7 +84,9 @@
 
         <!-- Displays items HAVE TO FIX THIS ONE!!! -->
         <!--  {{data}}
- -->        <div ng-repeat="item in data.items[wishlist.id]">
+ -->      
+         <!--  #### {{ data.items[wishlist.id]}}  --> 
+          <div ng-repeat="item in data.items[wishlist.id]">
           <span>+++++++</span>{{item.name}}  
 
           <i class="fa fa-pencil-square-o" aria-hidden="true" ng-click='itemRenaming = !itemRenaming'></i>
@@ -113,13 +115,17 @@
           <br>
          <!--  TEST
           {{data}} -->
+          <!-- <div ng-repeat='result in data.searchResults'>
+          {{result}}
+          </div> -->
+
+        </div> <!-- Closing ng-repeat="item in data.items[wishlist.id]" -->
           <div ng-repeat="result in data.searchResults track by $index" class="productCard" ng-click="saveToDatabase(data.query, $index, wishlist.id, wishlist)">
             <img src="{{result.mediumImage}}">
             {{result.name.substring(0, 70)}}
             {{result.price}}
             <img src="{{result.ratingImage}}">
-        </div>
-        </div> <!-- Closing ng-repeat="item in data.items[wishlist.id]" -->
+          </div>
       </div> <!-- Closing <div ng-show="expand"> -->
     </div> <!-- Closing col-md-8 col-md-offset-2 well -->
   </div> <!-- Closing ng-repeat wishlist in data.wishlists -->
