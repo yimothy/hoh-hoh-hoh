@@ -84,7 +84,7 @@ angular.module('hoh.services', [])
  */
 
 .factory('Item', ($http) => {
-  const getAllItems = ({ id }) => $http({
+  const getAllItems = ( id  ) => $http({
     method: 'POST',
     url: '/api/item/get',
     data: { id },
@@ -112,7 +112,7 @@ angular.module('hoh.services', [])
   })
     .then(({ data }) => data);
 
-  const callApiForItem = (query) => $http({
+  const callApiForItem = (query) => $http({ //API CALL +++
     method: 'POST',
     url: '/api/walmart/',
     data: {query}
@@ -122,14 +122,15 @@ angular.module('hoh.services', [])
     return searchResults;
   });
 
-  const saveToDatabase = (name, product_id) => $http({
+  const saveToDatabase = (name, product_id, wishlist_id) => $http({ //SAVE TO DATABASE
     method: 'POST',
     url: '/api/wishlist/item',
-    data: {name, product_id}
+    data: {name, product_id, wishlist_id}
   })
-  .then((name, product_id) => {
-    console.log('name, product_id', name, product_id);
-    return itemInDatabase;
+  .then((response) => {
+    // console.log('++++++++++++ name, product_id', name, product_id);
+    console.log('###RESPONSE', response.config.data);
+    // return itemInDatabase;
   });
 
   return { getAllItems, addItemToList, editItem, deleteItemFromList, callApiForItem, saveToDatabase };

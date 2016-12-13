@@ -9,7 +9,7 @@ angular.module('hoh.wishlist', [])
 .controller('WishlistController', function ($scope, Wishlist, Item) {
   $scope.data = {};                                // Main data object to store wishlists and items
   $scope.data.items = {};                          // Items from wishlist are stored here.
-  $scope.data.searchResults = [];
+  $scope.data.searchResults = []; //Search Results
 
   /*
    • Function: addList()
@@ -37,10 +37,16 @@ angular.module('hoh.wishlist', [])
    */
 
   $scope.getAllItems = (wishlist) => {
-    Item.getAllItems(wishlist)
+    console.log("+++++++++++++++", wishlist)
+    // console.log("+++++++++++++++++++++", wishlist)
+    Item.getAllItems(wishlist.id)
       .then((items) => {
+        console.log("ITEM", items);
+        // console.log("++++++++++++++", JSON.parse(items), wishlist.id)
         const id = wishlist.id;
-        $scope.data.items[id] = JSON.parse(items);
+        $scope.data.items[wishlist.id] = items; //JSON.parse?
+
+        console.log("++++++++++++++", $scope.data.items[wishlist.id])
       });
   };
 
@@ -120,18 +126,19 @@ angular.module('hoh.wishlist', [])
       });
   };
 
-  $scope.saveToDatabase = (query, index) => {
+  $scope.saveToDatabase = (query, index, listId, wishlist) => {
     console.log("$scope.data.results[index].itemId, query", query, $scope.data.searchResults[index].itemId) //refactor this
     console.log("$scope.data.results, query", $scope.data.searchResults)
-    var product_id = JSON.stringify($scope.data.searchResults[index]);
+    // var product_id = JSON.stringify($scope.data.searchResults[index]);
+    var product_id = $scope.data.searchResults[index]; // or JSON.stringify?
     // product_id = JSON.stringify(product_id);
     console.log("product_id", product_id)
-    Item.saveToDatabase(query, product_id)
+    Item.saveToDatabase(query, product_id, listId)
       .then(() => {
         $scope.data.searchResults = {};
         console.log('Added to db');
+         $scope.getAllItems(wishlist);
       });
-
   };
 
   /*

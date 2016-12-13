@@ -6,6 +6,7 @@ module.exports = {
       //request in object format, plucked out userId from req.body, passing down as params
       //send back item results in json format
       const params = id;
+      console.log("PARAMS", params)
       itemModel.items.getAll(params, (results) => {
         res.json(results);
       });
@@ -19,12 +20,17 @@ module.exports = {
       });
     },
 
-    postProductId({ body: { name, product_id } }, res) {
+    postProductId({ body: { name, product_id, wishlist_id } }, res) {
       //request in object format, plucked out itemname and userId from req.body, passing down as params
-      const params = [product_id, name];
+      const params = [product_id, name, wishlist_id];
+      console.log("product_id", product_id);
+      console.log("name", name);
+      console.log("wishlist_id", wishlist_id)
       console.log("params from within postProductId", params);
-      itemModel.items.addProduct(params, () => {
-        res.sendStatus(201);
+      itemModel.items.addProduct(params, (result) => {
+        // res.sendStatus(201);
+        console.log("SUccess")
+        res.json(result);
       });
     },
 

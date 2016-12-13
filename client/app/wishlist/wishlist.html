@@ -45,7 +45,7 @@
 
       <!-- X Glyph, when clicked calls deletelList and pass in the current wishlist -->
       <i class="fa fa-times" aria-hidden="true" ng-click='deleteList(wishlist)'></i>
-
+      <!--TESTED, IT WORKS -->
       <!-- Input field for editing wishlist name  -->
       <div ng-show='renaming'>
         <form name='rename'>
@@ -78,13 +78,15 @@
           />
 
           <!-- Plus button calls addItem, passes in the name of the item and the current wishlist -->
-          <i class="fa fa-plus" aria-hidden="true" ng-click="addItem(data.itemName, wishlist); callApi(data.itemName, wishlist)"></i>
+          <i class="fa fa-plus" aria-hidden="true" ng-click="callApi(data.itemName, wishlist)"></i>
+          <!-- ng-click="addItem(data.itemName, wishlist)"; -->
         </form>
 
-        <!-- Displays items -->
-        <div ng-repeat="item in data.items[wishlist.id]">
-          {{item.name item.itemId}}
-        </div>
+        <!-- Displays items HAVE TO FIX THIS ONE!!! -->
+        <!--  {{data}}
+ -->        <div ng-repeat="item in data.items[wishlist.id]">
+          <span>+++++++</span>{{item.name}}  
+
           <i class="fa fa-pencil-square-o" aria-hidden="true" ng-click='itemRenaming = !itemRenaming'></i>
           <!-- Pencil Glyph that toggles the display of <div ng-show='itemRemaning'> below -->
 
@@ -109,8 +111,9 @@
           <!-- X Glyph, when clicked calls deletelItem and pass in the current wishlist and current item ID -->
           <i class="fa fa-times" aria-hidden="true" ng-click='deleteItem(wishlist, item.id)'></i>
           <br>
-
-          <div ng-repeat="result in data.searchResults track by $index" class="productCard" ng-click="saveToDatabase(data.query, $index)">
+         <!--  TEST
+          {{data}} -->
+          <div ng-repeat="result in data.searchResults track by $index" class="productCard" ng-click="saveToDatabase(data.query, $index, wishlist.id, wishlist)">
             <img src="{{result.mediumImage}}">
             {{result.name.substring(0, 70)}}
             {{result.price}}
