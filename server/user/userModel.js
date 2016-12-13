@@ -37,4 +37,40 @@ module.exports = {
       });
     },
   },
+
+  followers: {
+    addOne(params, callback) {
+      const queryStr = 'INSERT INTO follows (user_id, following_id) VALUES (?, ?)';
+      db.query(queryStr, params, (err, results) => {
+        if (err) {
+          console.log(`Error in userModel.addOne - params: ${params} - error: ${err}`);
+        } else {
+          callback(results);
+        }
+      });
+    },
+
+    getFollowing(params, callback) {
+      const queryStr = 'SELECT following_id FROM follows WHERE user_id = ?';
+      db.query(queryStr, params, (err, results) => {
+        if (err) {
+          console.log(`Error in userModel.getFollowing - params: ${params} - error: ${err}`);
+        } else {
+          callback(results);
+        }
+      });
+    },
+
+    getFollowingUsers(params, callback) {
+      const queryStr = 'SELECT users.id, users.username FROM users INNER JOIN follows ON follows.following_id=users.id WHERE follows.user_id = ?';
+
+      db.query(queryStr, params, (err, results) => {
+        if (err) {
+          console.log(`Error in userModel.getFollowingUsers - params: ${params} - error: ${err}`);
+        } else {
+          callback(results);
+        }
+      });
+    }
+  },
 };

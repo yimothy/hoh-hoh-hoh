@@ -48,6 +48,16 @@ module.exports = {
         });
       }));
     },
+
+    getUser({ params: { id } }, res) {
+      userModel.users.getUser(id, (results) => {
+        if (results.length > 0) {
+          res.json(results[0]);
+        } else {
+          res.sendStatus(500);
+        }
+      });
+    },
   },
 
   middleware: {
@@ -68,6 +78,21 @@ module.exports = {
         req.user = false;
         next();
       }
+    }
+  },
+
+  followers: {
+    follow({ user: { id: userId }, body: { followId }}, res) {
+      const params = [userId, followId];
+      userModel.followers.addOne(params, (result) => {
+        res.json(result);
+      });
+    },
+
+    getFollowing({ user: { id: userId}}, res) {
+      userModel.followers.getFollowingUsers(userId, (results) => {
+        res.json(results);
+      });
     }
   }
 };

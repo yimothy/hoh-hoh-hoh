@@ -21,6 +21,12 @@ angular.module('hoh.services', [])
   })
     .then(({ data }) => data);
 
+  const getUserLists = (id) => $http({
+    method: 'GET',
+    url: '/api/wishlist/' + id,
+  })
+    .then(({ data }) => data);
+
   /*
    • Function: addList(name)
    • Invoked by: WishlistController - addList
@@ -76,7 +82,7 @@ angular.module('hoh.services', [])
   })
     .then(({ data }) => data);
 
-  return { addList, getAllList, renameList, deleteList };
+  return { addList, getAllList, getUserLists, renameList, deleteList };
 })
 
 /* Item Factory
@@ -172,5 +178,30 @@ angular.module('hoh.services', [])
     $location.path('/login');
   };
 
+  if (isAuth()) {
+    getSessionData();
+  }
+
   return { signin, signup, isAuth, signout, getSessionData, user };
+})
+.factory('Follows', ($http) => {
+  const followUser = (followId) => {
+    return $http.post('/api/users/followers', {
+      followId
+    })
+      .then((res) => res.data);
+  };
+
+  const getAllFollowsUsers = () => {
+    return $http.get('/api/users/following')
+      .then((res) => res.data);
+  };
+
+  return { getAllFollowsUsers, followUser };
+})
+.factory('User', ($http) => {
+  const getUser = (id) => $http.get('/api/users/' + id)
+  .then((res) => res.data);
+
+  return { getUser };
 });
