@@ -23,11 +23,18 @@
     </div>
 
   <h2>Your Rooms</h2>
-  <div id='current-rooms' ng-repeat='room in data.userData.rooms track by room.room_id'>
+  <div id='current-rooms' >
     <!-- NG-REPEAT USER'S ROOMS HERE -->
-    <div ng-click='goToRoom(room.room_id);'>
-      ID {{room.room_id}} NAME {{room.room_name}}
-    </div>
+    <table class="table table-hover">
+      <tr>
+        <th>Room ID:</th>
+        <th>Room Name:</th>
+      </tr>
+      <tr ng-click='goToRoom(room.room_id);' ng-repeat='room in data.userData.rooms track by room.room_id'>
+        <td>{{room.room_id}}</td>
+        <td>{{room.room_name}}</td>
+      </tr>
+    </table>
     <!-- GET USERS IN THE ROOM -->
     <!-- <div ng-repeat='user in data.roomData.users track by user.user_id'>
       {{user}}
