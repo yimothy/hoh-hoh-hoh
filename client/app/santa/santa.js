@@ -5,6 +5,7 @@ angular.module('hoh.santa', [])
   $scope.data = {};
   $scope.data.createRoom = {};
   $scope.data.createRoom.roomUsers = [];
+  $scope.data.createRoom.santas = [];
 
   $scope.data.userData = {};
   $scope.data.userData.rooms = [];
@@ -16,12 +17,30 @@ angular.module('hoh.santa', [])
     $scope.data.createRoom.roomUsers.push(user);
   }
 
+  $scope.createSantas = function(usernameArray) {
+    let copy = Array.prototype.slice.call(usernameArray);
+
+    // Setting the receiver to the last index item to resolve an undesired permutation
+    for ( var i = 0, receiver = copy[copy.length-1]; i < usernameArray.length; i++ ) {
+        while ( receiver === usernameArray[i] || !receiver )
+            // Grab a random member from the usernameArray
+            receiver = copy[ Math.floor((Math.random() * copy.length)) ];
+        copy.splice( copy.indexOf(receiver), 1 );
+        $scope.data.createRoom.santas.push(
+          {'santa_id': usernameArray[i],
+          'receiverName': receiver});
+        receiver = null;
+    }
+  }
+
   $scope.createRoom = function() {
     Auth.getSessionData();
     //Something like SantaFactory.createRoom($scope.data)
     //Change to get actual user id
     let userID = Auth.user.id;
-        console.log('THIS IS THE USER ID IN CREATE ROOMS ANGULAR: ', userID);
+    $scope.data.createRoom.roomUsers.push(userID);
+    // console.log('THIS IS THE SANTA ARRAY IN FRONT: ', $scope.dat)
+    $scope.createSantas($scope.data.createRoom.roomUsers);
     SantaFactory.createRoom(userID, $scope.data.createRoom)
     .then(function() {
     //Reset createRoom object
@@ -52,6 +71,7 @@ angular.module('hoh.santa', [])
 //Creates room
 //Save in users in created room user's database
   var createRoom = function(userID, roomData) {
+    console.log('THIS IS THE ROOM DATA IN FACTORY: ', roomData);
     return $http.post('/api/santa/' + userID, roomData)
   }
 
