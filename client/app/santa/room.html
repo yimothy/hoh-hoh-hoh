@@ -1,12 +1,12 @@
 <div class='container' ng-controller='RoomController'>
   <h1>Your Room</h1>
-
-  <h2>Users in Room</h2>
+  <div id='users-in-room'>
+    <h2>Users in Room</h2>
     <!-- GET USERS IN THE ROOM -->
-    <div ng-repeat='user in data.roomData.users track by user.user_id'>
-      ID: {{user.user_id}} Name: {{user.username}}
-    </div>
-
+      <div ng-repeat='user in data.roomData.users track by user.user_id'>
+        ID: {{user.user_id}} Name: {{user.username}}
+      </div>
+  </div>
     <p>{{ data.roomData.users }}</p>
-    <p>THIS IS YOUR RECEIVER: {{data.receiver}}</p>
+    <p>THIS IS YOUR RECEIVER: {{data.receiverName}}</p>
 </div>
