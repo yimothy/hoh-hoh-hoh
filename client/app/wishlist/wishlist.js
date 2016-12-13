@@ -46,7 +46,7 @@ angular.module('hoh.wishlist', [])
         const id = wishlist.id;
         $scope.data.items[wishlist.id] = items; //JSON.parse?
 
-        console.log("++++++++++++++", $scope.data.items[wishlist.id])
+        console.log("++++++++++++++ $scope.data.items[wishlist.id]", $scope.data.items[wishlist.id])
       });
   };
 
@@ -125,11 +125,17 @@ angular.module('hoh.wishlist', [])
   $scope.callApi = (query, wishlist) => {
     console.log('From within client/app/wishlist/wishlist.js: name, wishlist', query, wishlist);
     $scope.data.query = query;
+
+    console.log("$scope.data.query", $scope.data.query) 
+
     Item.callApiForItem(query, wishlist.id)
       .then((searchResults) => {
-        console.log('searchResults', searchResults.data);
+       console.log('SearchResults => 126', searchResults );
         $scope.data.searchResults = searchResults.data.slice(0, 5);
+
+        console.log("SEARCHRESULTS-05)", $scope.data.searchResults );
         $scope.getAllItems(wishlist);
+        $scope.expand = true;
       });
   };
 
