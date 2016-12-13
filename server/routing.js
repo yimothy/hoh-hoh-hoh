@@ -25,8 +25,12 @@ module.exports = (app, express) => {
   // requests for home page, with auth check
   app.post('/api/users/signin', userController.users.signin);
   app.post('/api/users/signup', userController.users.signup);
+  app.post('/api/users/followers', userController.followers.follow);
+  app.get('/api/users/following', userController.followers.getFollowing);
+  app.get('/api/users/:id', userController.users.getUser);
 
-  app.get('/api/wishlist', wishlistController.wishlists.getByUser);
+  app.get('/api/wishlist', wishlistController.wishlists.get);
+  app.get('/api/wishlist/:id', wishlistController.wishlists.getByUser);
   app.post('/api/wishlist', wishlistController.wishlists.post);
   app.post('/api/wishlist/rename', wishlistController.wishlists.rename);
   app.post('/api/wishlist/delete', wishlistController.wishlists.delete);

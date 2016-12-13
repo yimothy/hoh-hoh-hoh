@@ -7,8 +7,9 @@ angular.module('hoh', [
   'hoh.wishlist',                              // Re: wishlists and items
   'hoh.services',                              // All of our services/factories except AttachTokens
   'hoh.auth',
-  'hoh.santa',
   'hoh.room',                               // Re: Authentication
+  'hoh.santa',                                // Re: Authentication
+  'hoh.user',
   'ngRoute',
 ])
 
@@ -34,6 +35,14 @@ angular.module('hoh', [
     .when('/santa/:id', {
       templateUrl: 'santa/room.html',
       controller: 'RoomController'
+    })
+    .when('/following', {
+      templateUrl: 'user/following.html',
+      controller: 'FollowsController'
+    })
+    .when('/users/:id', {
+      templateUrl: 'user/profile.html',
+      controller: 'ProfileController'
     })
     .otherwise({ redirectTo: '/' });                 // All other request redirect to '/'
 
