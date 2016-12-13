@@ -1,9 +1,12 @@
 <div class="container-fluid">
-  <div class="col-md-4 col-md-offset-4">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="jumbotron">
+      <h1 class="text-center">{{ userData.username }}</h1>
+      <p>{{ userData.fullname || '' }}</p>
+      <p class="text-center" ng-show="userData.following"><span class="label label-success">Following</span></p>
+      <p ng-hide="userData.following"><a class="btn btn-block btn-primary" ng-click="followUser(userData.id)">Follow</a></p>
+    </div>
     <ul class="list-group">
-      <li class="list-group-item active">
-        {{ userData.username }}
-      </li>
       <li class="list-group-item" ng-repeat="list in userData.lists" ng-click="redirectList(list.id)">
         {{ list.name }}
       </li>
