@@ -186,7 +186,7 @@ angular.module('hoh.services', [])
 })
 .factory('Follows', ($http) => {
   const followUser = (followId) => {
-    return $http.post('/api/users/followers', {
+    return $http.post('/api/users/follow', {
       followId
     })
       .then((res) => res.data);

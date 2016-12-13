@@ -25,7 +25,7 @@ module.exports = (app, express) => {
   // requests for home page, with auth check
   app.post('/api/users/signin', userController.users.signin);
   app.post('/api/users/signup', userController.users.signup);
-  app.post('/api/users/followers', userController.followers.follow);
+  app.post('/api/users/follow', userController.followers.follow);
   app.get('/api/users/following', userController.followers.getFollowing);
   app.get('/api/users/:id', userController.users.getUser);
 
@@ -69,7 +69,7 @@ module.exports = (app, express) => {
   });
   //saving itemId to the database
   app.post('/api/wishlist/item', itemController.items.postProductId);
-  
+
  //Walmart itemId Api
   app.post('/api/walmart/itemId', function(req, res) {
     walmartSearchId.searchItemId(req.body.query, function(data) {
