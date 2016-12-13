@@ -23,6 +23,7 @@ module.exports = (app, express) => {
   app.post('/api/users/signup', userController.users.signup);
   app.post('/api/users/followers', userController.followers.follow);
   app.get('/api/users/following', userController.followers.getFollowing);
+  app.get('/api/users/:id', userController.users.getUser);
 
   app.get('/api/wishlist', wishlistController.wishlists.get);
   app.get('/api/wishlist/:id', wishlistController.wishlists.getByUser);
