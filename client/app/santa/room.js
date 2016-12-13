@@ -35,7 +35,7 @@ angular.module('hoh.room', [])
     })
     .then(function(receiverID) {
       console.log('this is thE RECEIVER ID: ', receiverID);
-      return Wishlist.getListById(receiverID)
+      return Wishlist.getUserLists(receiverID)
     })
     .then(function(wishlist) {
       $scope.data.wishlist = wishlist[0];
