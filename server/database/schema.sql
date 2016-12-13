@@ -88,6 +88,7 @@ CREATE TABLE `users_rooms` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `user_id` INTEGER NULL DEFAULT NULL,
   `room_id` INTEGER NULL DEFAULT NULL,
+  `receiver_id` INTEGER NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
