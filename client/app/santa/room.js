@@ -12,7 +12,7 @@ angular.module('hoh.room', [])
     for(let i = 0; i < array.length; i++) {
       console.log('CHECK THIS ONE: ', array[i]);
       if(array[i].user_id === userID) {
-        $scope.data.receiver = array[i].receiver_id;
+        return array[i];
       }
     }
   }
@@ -25,8 +25,15 @@ angular.module('hoh.room', [])
     .then(function(users) {
       $scope.data.roomData.users = users.data;
       console.log('THESE ARE USERS IN THE FRONT END: ', $scope.data.roomData.users);
-      $scope.getReceiver(users.data);
+      return $scope.getReceiver(users.data);
     })
+    .then(function(receiverData) {
+      console.log('THIS IS THE RECEIVERDATA: ', receiverData);
+      $scope.data.receiverID = receiverData.receiver_id;
+      $scope.data.receiverName = receiverData.receiverName;
+
+    })
+
     // .then(function() {
     // })
     // .then(function() {
