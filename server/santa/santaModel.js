@@ -158,12 +158,14 @@ module.exports = {
         for(let i = 0; i < results.length; i++) {
           let userID = results[i];
           findUserName(userID.user_id, function(username) {
-            userNames.push({user_id: username[0].id, username: username[0].username, receiver_id: userID.receiver_id});
-            asyncIdx++;
-            if(asyncIdx === results.length) {
-              console.log('THESE ARE THE USERDATA IN THE BACK: ', userNames);
-              callback(userNames);
-            }
+            findUserName(userID.receiver_id, function(receiverName) {
+              userNames.push({user_id: username[0].id, username: username[0].username, receiver_id: userID.receiver_id, receiverName: receiverName[0].username});
+              asyncIdx++;
+              if(asyncIdx === results.length) {
+                console.log('THESE ARE THE USERDATA IN THE BACK: ', userNames);
+                callback(userNames);
+              }
+            })
           })
         }
       }
