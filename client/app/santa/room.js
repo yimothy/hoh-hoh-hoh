@@ -4,7 +4,7 @@ angular.module('hoh.room', [])
   $scope.data = {};
   $scope.data.roomData = {};
 
-  Auth.getSessionData();
+
   let userID = Auth.user.id;
   let id = $routeParams.id;
 
@@ -18,7 +18,7 @@ angular.module('hoh.room', [])
   }
 
   $scope.getUsersInRoom = function(roomID) {
-    Auth.getSessionData();
+
     let userID = Auth.user.id;
     let id = $routeParams.id;
     RoomFactory.getUsersInRoom(userID, id)

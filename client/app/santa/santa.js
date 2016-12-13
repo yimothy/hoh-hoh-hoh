@@ -1,8 +1,6 @@
 angular.module('hoh.santa', [])
 
 .controller('SantaController', function($scope, $location, SantaFactory, Auth) {
-  Auth.getSessionData();
-
   $scope.data = {};
   $scope.data.createRoom = {};
   $scope.data.createRoom.roomUsers = [];
@@ -40,7 +38,7 @@ angular.module('hoh.santa', [])
   }
 
   $scope.createRoom = function() {
-    Auth.getSessionData();
+
     //Something like SantaFactory.createRoom($scope.data)
     //Change to get actual user id
     let userID = Auth.user.id;
@@ -58,7 +56,7 @@ angular.module('hoh.santa', [])
   }
 
   $scope.getRooms = function() {
-    Auth.getSessionData();
+
     let userID = Auth.user.id;
         console.log('THIS IS THE USER ID IN GETROOMS ANGULAR: ', userID);
     SantaFactory.getRooms(userID, $scope.data.userData.rooms)
