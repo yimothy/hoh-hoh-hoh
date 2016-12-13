@@ -4,6 +4,17 @@ const db = require('../database/config_deploy');
 
 module.exports = {
   wishlists: {
+    getById(params, callback) {
+      const queryStr = 'SELECT name, id FROM wishlists WHERE id = ?';
+      db.query(queryStr, params, (err, results) => {
+        if (err) {
+          console.log(`Error in wishlistModel.getById - params: ${params} - error: ${err}`);
+        } else {
+          callback(results);
+        }
+      });
+    },
+
     getAll(callback) {
       //save query string in separate var to pass into database query
       const queryStr = 'SELECT name, id FROM wishlists';

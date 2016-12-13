@@ -2,9 +2,6 @@ angular.module('hoh.auth', [])
 
 .controller('AuthController', function ($scope, $window, $location, Auth) {
   $scope.user = Auth.user;
-  if ($window.localStorage.getItem('com.hohlife')) {
-    Auth.getSessionData();
-  }
 
   $scope.signin = () => {
     //pass entire user scope down
