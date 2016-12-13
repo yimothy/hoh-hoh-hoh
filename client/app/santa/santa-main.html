@@ -1,8 +1,9 @@
 <div class='container-fluid' ng-controller='SantaController'>
+  <link rel="stylesheet" type="text/css" href="style.css">
   <h1>Secret Santa</h1>
-  <button>Add Room</button>
+  <button ng-click='roomButton()' ng-show='!data.roomButton'>Add Room</button>
 
-    <div id='create-room'>
+    <div id='create-room' ng-show='data.roomButton'>
       <form>
         <div>Room Name:
           <div>
@@ -18,7 +19,9 @@
           <input type='text' placeholder='Enter Username' ng-model='newUser'></input>
           <button ng-click='addUserToRoom(newUser); newUser="";'>Add</button>
         </div>
+        <br>
         <button ng-click='createRoom()'>Create Room</button>
+        <button ng-click='roomButton()'>Cancel</button>
       </form>
     </div>
 
