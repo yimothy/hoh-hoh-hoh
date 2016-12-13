@@ -35,6 +35,10 @@ angular.module('hoh', [
       templateUrl: 'user/following.html',
       controller: 'FollowsController'
     })
+    .when('/users/:id', {
+      templateUrl: 'user/profile.html',
+      controller: 'ProfileController'
+    })
     .otherwise({ redirectTo: '/' });                 // All other request redirect to '/'
 
   $httpProvider.interceptors.push('AttachTokens');
