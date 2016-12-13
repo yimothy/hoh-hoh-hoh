@@ -7,6 +7,7 @@ angular.module('hoh.santa', [])
   $scope.data.createRoom = {};
   $scope.data.createRoom.roomUsers = [];
   $scope.data.createRoom.santas = [];
+  $scope.data.roomButton = false;
 
   $scope.data.userData = {};
   $scope.data.userData.rooms = [];
@@ -16,6 +17,10 @@ angular.module('hoh.santa', [])
 
   $scope.addUserToRoom = function(user) {
     $scope.data.createRoom.roomUsers.push(user);
+  }
+
+  $scope.roomButton = function() {
+    $scope.data.roomButton = !$scope.data.roomButton;
   }
 
   $scope.createSantas = function(usernameArray) {
@@ -45,6 +50,7 @@ angular.module('hoh.santa', [])
     SantaFactory.createRoom(userID, $scope.data.createRoom)
     .then(function() {
     //Reset createRoom object
+      $scope.roomButton();
       $scope.getRooms();
       $scope.data.createRoom.roomUsers = [];
       $scope.data.createRoom.roomName = '';

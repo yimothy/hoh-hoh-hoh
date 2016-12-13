@@ -26,3 +26,11 @@ body {
   height: 270px;
   padding: 10px;
 }
+#users-in-room {
+  /*border: 5px blue;*/
+  width: 200px;
+  /*float: right;*/
+  /*position: absolute;
+  right: 40px;*/
+  /*margin-top: -60px;*/
+}
