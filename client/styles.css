@@ -34,3 +34,15 @@ body {
   right: 40px;*/
   /*margin-top: -60px;*/
 }
+#room-name {
+  font-weight: bold;
+  font-size: 15px;
+}
+#create-room {
+  border-style: groove;
+  width: 200px;
+}
+.create-text {
+  font-weight: bold;
+  /*font-size: 40px;*/
+}
