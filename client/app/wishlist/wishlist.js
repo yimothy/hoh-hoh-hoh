@@ -45,6 +45,8 @@ angular.module('hoh.wishlist', [])
         // console.log("++++++++++++++", JSON.parse(items), wishlist.id)
         const id = wishlist.id;
         $scope.data.items[wishlist.id] = items; //JSON.parse?
+
+        console.log("++++++++++++++", $scope.data.items[wishlist.id])
       });
   };
 
