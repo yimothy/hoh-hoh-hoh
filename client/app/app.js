@@ -8,6 +8,7 @@ angular.module('hoh', [
   'hoh.services',                              // All of our services/factories except AttachTokens
   'hoh.auth',
   'hoh.santa',                                // Re: Authentication
+  'hoh.user',
   'ngRoute',
 ])
 
