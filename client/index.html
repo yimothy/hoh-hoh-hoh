@@ -19,6 +19,15 @@
   <body>
     <div class='container-fluid' ng-controller="AuthController">
 
+      <!-- Play secret santa button -->
+      <div style='float:left; padding-top:10px; margin-bottom:-40px'>
+        <a href = '/#!/santa'>
+        <button type='button'
+          class="btn btn-default btn-md">
+          Play Secret Santa!
+        </button>
+      </a>
+      </div>
       <!-- Sign out Button !-->
       <div style='float:right; padding-top:10px; margin-bottom:-40px' ng-hide="!isAuth()">
         {{ user.username }}
